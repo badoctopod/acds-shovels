@@ -1,0 +1,61 @@
+name: 'Build and Deploy'
+
+on:
+
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
+
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "*.md"
+
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup OpenJDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@3.5
+        with:
+          lein: 'latest'
+
+      - name: Cache local Maven repository
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('project.clj') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Install dependencies
+        run: lein deps
+
+      - name: Uberjar
+        run: lein uberjar
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "acds-http-api"
+          heroku_email: ${{secrets.PERSONAL_EMAIL}}
+          usedocker: true

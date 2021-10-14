@@ -1,0 +1,34 @@
+{:pite {:dbtype   "oracle"
+        :dbname   "CHANGEME"
+        :username "CHANGEME"
+        :password "CHANGEME"
+        :host     "CHANGEME"
+        :port     1521
+        :poolName "[PITE]"}
+
+ :http {:ip     "0.0.0.0"
+        :port   8088
+        :thread 4}
+
+ :http-misc {:stop-timeout 100}
+
+ :log {:pattern   "dd-MM-yyyy HH:mm:ss.SSS"
+       :timezone  "Europe/Moscow"
+       :path      "logs/app.log"
+       :backlog   5
+       :file-size 10485761
+       :level     :debug}
+
+ :api-instance {:version "v2.0.0"
+                :instance "development"}
+
+ :api-description {:swagger {:info {:title "ИС \"Карьер\".HTTP API: интеграционный интерфейс"
+                                    :description "Программный интерфейс информационной системы \"Карьер\" предприятия, предназначенный для интеграции с управляющим ПО бортовых компьютеров единиц техники участка экскавации по протоколу HTTP."
+                                    :version ""}
+                             :host "localhost:8088"
+                             :basePath ""}
+                   :soap {:summary "История рейсов"
+                          :description "Запрос возвращает историю рейсов, выполненных самосвалами, на запрошенный экскаватор"}}
+
+ :params {:minloadtime  7
+          :idlestoptype 67}}
