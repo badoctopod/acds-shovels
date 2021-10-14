@@ -4,8 +4,8 @@
   :dependencies [[org.clojure/clojure "1.10.3"]
                  [cprop "0.1.18"]
                  [seancorfield/next.jdbc "1.2.659"]
+                 [com.oracle.jdbc/ojdbc8 "12.2.0.1"]
                  [com.zaxxer/HikariCP "4.0.3"]
-                 [local/ojdbc8 "12.2.0.1.0"]
                  [com.layerware/hugsql "0.5.1"]
                  [com.layerware/hugsql-adapter-next-jdbc "0.5.1"]
                  [http-kit "2.5.3"]
@@ -16,6 +16,8 @@
                  [org.slf4j/slf4j-api "1.7.32"]
                  [com.fzakaria/slf4j-timbre "0.3.21"]
                  [commons-daemon/commons-daemon "1.2.4"]]
+
+  :repositories [["XWiki External Repository" "https://maven.xwiki.org/externals/"]]
 
   :pedantic? false
 
